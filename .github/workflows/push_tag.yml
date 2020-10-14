@@ -34,7 +34,7 @@ jobs:
       - name: Build Image
         uses: docker/build-push-action@v2
         with:
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/arm64
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/xen-orchestra-ce:${{ github.event.release.tag_name }}
+          tags: ghcr.io/${{ github.repository_owner }}/xen-orchestra-ce-arm64:${{ github.event.release.tag_name }}
 

@@ -8,9 +8,9 @@ RUN apk add --no-cache git python2 g++ make bash
 RUN git clone -b master https://github.com/vatesfr/xen-orchestra
 
 RUN cd /home/node/xen-orchestra && \
-    yarn config set network-timeout 300000 && \
-    yarn && \
-    yarn build
+    yarn config set network-timeout 300000
+RUN cd /home/node/xen-orchestra && yarn --verbose
+RUN cd /home/node/xen-orchestra && yarn build --verbose
 
 COPY link_plugins.sh /home/node/xen-orchestra/packages/xo-server/link_plugins.sh
 RUN /home/node/xen-orchestra/packages/xo-server/link_plugins.sh
