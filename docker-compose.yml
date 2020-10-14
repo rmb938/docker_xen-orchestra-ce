@@ -1,0 +1,23 @@
+version: '3'
+services:
+    orchestra:
+        build: .
+        image: local/xen-orchestra-ce
+        depends_on:
+            - redis
+        cap_add:
+          - SYS_ADMIN
+        volumes:
+            - xo-data:/storage
+        network_mode: service:redis
+    redis:
+        image: redis:alpine
+        command: redis-server --appendonly yes
+        volumes:
+            - redis-data:/data
+        ports:
+            - "80:80"
+
+volumes:
+  xo-data:
+  redis-data:
