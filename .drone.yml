@@ -1,11 +1,10 @@
 kind: pipeline
 type: docker
-name: default
+name: ARM64 Build
 
 platform:
   os: linux
   arch: arm64
-
 
 steps:
 - name: Build PR
@@ -15,4 +14,24 @@ steps:
   image: plugins/docker
   settings:
     repo: ghcr.io/rmb938/xen-orchestra-ce-arm64
+    dry_run: true
+
+---
+
+kind: pipeline
+type: docker
+name: AMD64 Build
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: Build PR
+  when:
+    event:
+      - pull_request
+  image: plugins/docker
+  settings:
+    repo: ghcr.io/rmb938/xen-orchestra-ce-amd64
     dry_run: true
