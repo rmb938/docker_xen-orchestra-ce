@@ -9,8 +9,8 @@ RUN git clone -b master https://github.com/vatesfr/xen-orchestra
 
 RUN cd /home/node/xen-orchestra && \
     yarn config set network-timeout 300000
-RUN cd /home/node/xen-orchestra && yarn --verbose
-RUN cd /home/node/xen-orchestra && yarn build --verbose
+RUN cd /home/node/xen-orchestra && env JOBS=8 yarn --verbose
+RUN cd /home/node/xen-orchestra && env JOBS=8 yarn build --verbose
 
 COPY link_plugins.sh /home/node/xen-orchestra/packages/xo-server/link_plugins.sh
 RUN /home/node/xen-orchestra/packages/xo-server/link_plugins.sh
