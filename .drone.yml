@@ -14,8 +14,25 @@ steps:
       - pull_request
   image: plugins/docker
   settings:
+    registry: ghcr.io
     repo: ghcr.io/rmb938/xen-orchestra-ce-arm64
     dry_run: true
+    tags:
+      - ${DRONE_COMMIT_SHA:0:8}
+
+- name: Build Tag
+  when:
+    event:
+      - tag
+  image: plugins/docker
+  settings:
+    registry: ghcr.io
+    repo: ghcr.io/rmb938/xen-orchestra-ce-arm64
+    username: rmb938
+    password:
+      from_secret: docker_password
+    tags:
+      - ${DRONE_TAG}
 
 ---
 kind: pipeline
@@ -33,5 +50,22 @@ steps:
       - pull_request
   image: plugins/docker
   settings:
+    registry: ghcr.io
     repo: ghcr.io/rmb938/xen-orchestra-ce-amd64
     dry_run: true
+    tags:
+      - ${DRONE_COMMIT_SHA:0:8}
+
+- name: Build Tag
+  when:
+    event:
+      - tag
+  image: plugins/docker
+  settings:
+    registry: ghcr.io
+    repo: ghcr.io/rmb938/xen-orchestra-ce-amd64
+    username: rmb938
+    password:
+      from_secret: docker_password
+    tags:
+      - ${DRONE_TAG}
